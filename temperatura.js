@@ -1,8 +1,9 @@
 class Temperatura extends Medida {
-    constructor(cantidad, unidad) {
+    constructor(cantidad) {
         super(cantidad);
-        this.cantidad = cantidad;
-        this.unidad = unidad;
+    }
+    toFarenheit(){
+        return this.farenheit();
     }
 }
 Medida.tipos.Temperatura = Temperatura;

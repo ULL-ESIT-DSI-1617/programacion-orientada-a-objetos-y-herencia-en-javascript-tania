@@ -1,7 +1,9 @@
 class Medida {
     constructor(numero) {
-        Object.assign(this, numero);
+        this.cantidad = numero;
+    }
+    toFarenheit(){
+        return this.farenheit();
     }
 }
  Medida.tipos = {};
- Medida.tipos.TipoIndefinido = {};

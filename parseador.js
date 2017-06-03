@@ -1,28 +1,32 @@
 function parsear(temp) {
-    //var numericPart = "([-+]?\d+(?:\.\d*)?)\s*";
-    //var cadenaUnidadDesde = "\s*([fFcC])";
-    //var regexp = "/" + numericPart + cadenaUnidadDesde "/";
+    var regexp = /([-+]?\d+(?:\.\d*)?)\s*([fFcCkK])\s*((to)|(-))?\s*([fFcCkK])/;
+    var objetoMatch = temp.match(regexp);
+    var cantidad = objetoMatch[1];
+    var from = objetoMatch[2];
+    var to = objetoMatch[6];
+    if ((from == 'k') || (from == 'K')) from = "Kelvin";
+    if ((from == 'f') || (from == 'F')) from = "Farenheit";
+    if ((from == 'c') || (from == 'C')) from = "Celsius";
 
-    var regexp = new RegExp(''
-        + [-+]?\d+(?:\.\d*)?
-        + (\s*)
-        + ([fFcC])
-    );
-
-    var m = temp.match(regexp);
-
-    return instanciarMedida(m[1], m[2]);
+    if ((to == 'k') || (to == 'K')) to = "Kelvin";
+    if ((to == 'f') || (to == 'F')) to = "Farenheit";
+    if ((to == 'c') || (to == 'C')) to = "Celsius";
+    console.log(to);
+    var objectoParseado = [];
+    objectoParseado.push(cantidad);
+    objectoParseado.push(from);
+    objectoParseado.push(to);
+    return objectoParseado;
 }
 
  function instanciarMedida(cantidad, unidad) {
      var instanciaDeMedida;
+
      try {
-         Medida.tipos.Temperatura[unidad] = unidad;
-         instanciaDeMedida = new Medida.tipos.Temperatura[unidad] (cantidad, unidad);
+         instanciaDeMedida = new Medida.tipos.Temperatura[unidad] (cantidad);
      } catch (e){}
 
      try {
-         Medida.tipos.Distancia[unidad] = unidad;
          instanciaDeMedida = new Medida.tipos.Distancia[unidad] (cantidad);
      } catch (e){}
 
